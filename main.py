@@ -4,26 +4,31 @@ from telebot import types
 token = "2138712685:AAEeyqtUby3uksS2BSln5S1tRiEgYaIFPGI"
 bot = telebot.TeleBot("2138712685:AAEeyqtUby3uksS2BSln5S1tRiEgYaIFPGI")
 
+# Создание стартовой команды и выплывающих кнопок
 @bot.message_handler(commands=['start'])
 def start(message):
     keyboard = types.ReplyKeyboardMarkup()
     keyboard.row("Личный кабинет", "/help", "/grade_bot", "/secret", "/info")
     bot.send_message(message.chat.id, 'Привет! Хочешь узнать свежую информацию о МТУСИ?', reply_markup=keyboard)
 
+# Создание команды /help
 @bot.message_handler(commands=['help'])
 def start_message(message):
     bot.send_message(message.chat.id, 'Я могу помочь тебе с информацией о МТУСИ: \nЛичный кабинет\nНовости\n'
                                       'Расписание\nО МТУСИ\nЕсли что-то заинтересовало, напиши об этом')
 
+# Создание команды /Reminder
 @bot.message_handler(commands=['Reminder'])
 def start_message(message):
     bot.send_message(message.chat.id, 'У тебя все обязательно получится!')
 
+# Создание команды /info
 @bot.message_handler(commands=['info'])
 def start_message(message):
     bot.send_message(message.chat.id, 'Я был создан только для одной цели - уничтожить человечество(шучу)'
                                       'Кстати, можешь оставь свой отзыв тут - /grade_bot\nСпасибо')
 
+# Создание команды /grade_bot
 @bot.message_handler(commands=['grade_bot'])
 def start_message(message):
     markup = telebot.types.InlineKeyboardMarkup()
@@ -50,9 +55,11 @@ def query_handler(call):
     elif call.data == '5':
         answer = 'Это превосходно'
 
+# Удаление списка кнопок
     bot.send_message(call.message.chat.id, answer)
     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
 
+# Реакции бота на написанный текст
 @bot.message_handler(content_types=['text'])
 def answer(message):
     if message.text == "Новости":
@@ -64,6 +71,7 @@ def answer(message):
     if message.text == "О МТУСИ":
         bot.send_message(message.chat.id, 'Сведение об образовательной организации - https://mtuci.ru/sveden/')
 
+# Чтение ботом входящих сообщений пользователя
 bot.polling(none_stop=True, interval=0)
 
 
