@@ -8,7 +8,7 @@ bot = telebot.TeleBot("2138712685:AAEeyqtUby3uksS2BSln5S1tRiEgYaIFPGI")
 @bot.message_handler(commands=['start'])
 def start(message):
     keyboard = types.ReplyKeyboardMarkup()
-    keyboard.row("Личный кабинет", "/help", "/grade_bot", "/secret", "/info")
+    keyboard.row("Личный кабинет", "/help", "/grade_bot", "/reminder", "/info")
     bot.send_message(message.chat.id, 'Привет! Хочешь узнать свежую информацию о МТУСИ?', reply_markup=keyboard)
 
 # Создание команды /help
@@ -17,8 +17,8 @@ def start_message(message):
     bot.send_message(message.chat.id, 'Я могу помочь тебе с информацией о МТУСИ: \nЛичный кабинет\nНовости\n'
                                       'Расписание\nО МТУСИ\nЕсли что-то заинтересовало, напиши об этом')
 
-# Создание команды /Reminder
-@bot.message_handler(commands=['Reminder'])
+# Создание команды /reminder
+@bot.message_handler(commands=['reminder'])
 def start_message(message):
     bot.send_message(message.chat.id, 'У тебя все обязательно получится!')
 
